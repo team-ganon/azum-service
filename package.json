@@ -1,17 +1,27 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
-  "license": "",
+  "name": "azum-service",
+  "version": "1.0.0",
+  "description": "Reservation booking and calendar availability services for Airbnb website",
+  "author": "Azum Beg",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
+    "start": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production"
   },
   "dependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }
