@@ -15,6 +15,7 @@ let rental, availabilityArr;
 for(let i = 0; i < 100; i++) {
   let availabilityArr = [];
 
+  // generate 250 unique random dates
   let date;
   for(let j = 0; j < 250; j++) {
     date = randomDate();
