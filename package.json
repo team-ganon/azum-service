@@ -9,7 +9,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
-    "test": "jest"
+    "test": "jest --watchAll"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
