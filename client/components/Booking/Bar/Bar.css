@@ -1,0 +1,11 @@
+.price-calc {
+  width: 400px;
+  background-color: red;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.title {
+  width: 75%;
+}
