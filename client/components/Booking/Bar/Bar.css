@@ -7,5 +7,10 @@
 }
 
 .title {
-  width: 75%;
+  flex-basis: 300px;
+}
+
+.description {
+  flex-basis: 100px;
+  text-align: right;
 }

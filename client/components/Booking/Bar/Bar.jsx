@@ -36,7 +36,7 @@ class BookingBar extends Component {
           },
           fees: {
             cleaning_fee: data.fees.cleaning_fee,
-            service_fee: data.fees.service,
+            service_fee: data.fees.service_fee,
             occupancy_fee: data.fees.occupancy_fee
           },
           availability: data.availability
@@ -57,10 +57,15 @@ class BookingBar extends Component {
         <h3>Guests</h3>
         <div className="price-calc">
           <p className="title">${price} x 7 nights</p>
+          <p className="description">$1000</p>
           <p className="title">Cleaning fee</p>
+          <p className="description">${fees.cleaning_fee}</p>
           <p className="title">Service fee</p>
+          <p className="description">${fees.service_fee}</p>
           <p className="title">Occupancy taxes and fees</p>
+          <p className="description">${fees.occupancy_fee}</p>
           <p className="title">Total</p>
+          <p className="description">${1000 + fees.cleaning_fee + fees.service_fee + fees.occupancy_fee}</p>
         </div>
       </div>
     );
