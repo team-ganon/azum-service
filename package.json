@@ -14,6 +14,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bluebird": "^3.7.2",
+    "circular-std": "^1.0.3",
     "mongoose": "^5.9.4",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

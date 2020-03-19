@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./Bar.css";
+import styles from "./BookingBar.css";
+
+import Calendar from "../Calendar/Calendar.jsx";
 
 class BookingBar extends Component {
   constructor(props) {
@@ -51,22 +53,25 @@ class BookingBar extends Component {
     const { price, max_guest, reviews, fees, availability } = this.state;
     return (
       <div>
-        <h1>${price} per night</h1>
-        <p><b>{reviews.avgStars}</b> ({reviews.numReviews} reviews)</p>
-        <h3>Dates</h3>
-        <h3>Guests</h3>
-        <div className="price-calc">
-          <p className="title">${price} x 7 nights</p>
-          <p className="description">$1000</p>
-          <p className="title">Cleaning fee</p>
-          <p className="description">${fees.cleaning_fee}</p>
-          <p className="title">Service fee</p>
-          <p className="description">${fees.service_fee}</p>
-          <p className="title">Occupancy taxes and fees</p>
-          <p className="description">${fees.occupancy_fee}</p>
-          <p className="title">Total</p>
-          <p className="description">${1000 + fees.cleaning_fee + fees.service_fee + fees.occupancy_fee}</p>
+        <div className={styles.wrapper}>
+          <h1>${price} per night</h1>
+          <p><b>{reviews.avgStars}</b> ({reviews.numReviews} reviews)</p>
+          <h3>Dates</h3>
+          <h3>Guests</h3>
+          <div className={styles["price-calc"]}>
+            <p className={styles.title}>${price} x 7 nights</p>
+            <p className={styles.description}>$1000</p>
+            <p className={styles.title}>Cleaning fee</p>
+            <p className={styles.description}>${fees.cleaning_fee}</p>
+            <p className={styles.title}>Service fee</p>
+            <p className={styles.description}>${fees.service_fee}</p>
+            <p className={styles.title}>Occupancy taxes and fees</p>
+            <p className={styles.description}>${fees.occupancy_fee}</p>
+            <p className={`${styles.title} ${styles.total}`}>Total</p>
+            <p className={`${styles.description} ${styles.total}`}>${1000 + fees.cleaning_fee + fees.service_fee + fees.occupancy_fee}</p>
+          </div>
         </div>
+        <Calendar availability={availability}/>
       </div>
     );
   }

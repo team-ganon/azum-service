@@ -16,16 +16,19 @@ for(let i = 0; i < 100; i++) {
   let availabilityArr = [];
 
   // generate 250 unique random dates
-  let date;
+  let randDate, dateString;
   for(let j = 0; j < 250; j++) {
-    date = randomDate();
-    if(!availabilityArr.includes(date)) {
-      availabilityArr.push(date);
+    randDate = randomDate();
+    dateString = `${randDate.getMonth() + 1}/${randDate.getDate()}/${randDate.getFullYear()}`;
+
+    if(!availabilityArr.includes(dateString)) {
+      availabilityArr.push(dateString);
     } else {
-      while(availabilityArr.includes(date)) {
-        date = randomDate();
+      while(availabilityArr.includes(dateString)) {
+        randDate = randomDate();
+        dateString = `${randDate.getMonth() + 1}/${randDate.getDate()}/${randDate.getFullYear()}`;
       }
-      availabilityArr.push(date);
+      availabilityArr.push(dateString);
     }
   }
 

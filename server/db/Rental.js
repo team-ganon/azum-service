@@ -13,7 +13,7 @@ const rentalSchema = new mongoose.Schema({
     service_fee: Number,
     occupancy_fee: Number
   },
-  availability: [Date]
+  availability: [String]
 });
 
 module.exports = mongoose.model("Rental", rentalSchema);
