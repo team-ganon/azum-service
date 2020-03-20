@@ -1,10 +1,9 @@
-import App from "./App.jsx";
 import React from "react";
 import ReactDOM from "react-dom";
 import { shallow, configure } from "enzyme";
 
-// import Adapter from 'enzyme-adapter-react-16';
-// configure({adapter: new Adapter()});
+import App from "./App.jsx";
+import BookingBar from "../Booking/Bar/Bar.jsx";
 
 describe("App", () => {
   test("renders properly", () => {
@@ -13,10 +12,9 @@ describe("App", () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  test("has proper title", () => {
+  test("contains booking bar", () => {
     const wrapper = shallow(<App />);
-    const text = wrapper.find("p").text();
-    expect(text).toEqual("hello");
+    expect(wrapper.find(BookingBar)).toHaveLength(1);
   });
 });
 
