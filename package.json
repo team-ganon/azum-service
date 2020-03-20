@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "webpack-dev-server --open --mode development --content-base public/",
     "build": "webpack --mode production",
-    "test": "jest -c=jest.config.js --watchAll"
+    "test": "jest -c=jest.config.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
