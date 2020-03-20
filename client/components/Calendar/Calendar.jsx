@@ -78,7 +78,7 @@ class Calendar extends Component {
     });
 
     return (
-      <div class={styles.wrapper}>
+      <div className={styles.wrapper}>
         <div className={styles.grid}>
           <div className={styles.left_arrow} onClick={this.changeMonth} id="left">
             left
@@ -90,18 +90,18 @@ class Calendar extends Component {
             right
           </div>
           {daysOfWeek.map(dayOfWeek =>
-            <div className={styles.dayOfWeek}>{dayOfWeek}</div>
+            <div className={styles.dayOfWeek} key={dayOfWeek}>{dayOfWeek}</div>
           )}
           {days.map(day =>
             (() => {
               if (day === 1 && !daysAvailable.includes(`${day}`)) {
-                return <div className={styles.day} style={{ gridColumnStart: firstDayOfWeek + 1, backgroundColor: "grey" }}>{day}</div>
+                return <div className={styles.day} key={day} style={{ gridColumnStart: firstDayOfWeek + 1, backgroundColor: "grey" }}>{day}</div>
               } else if (day === 1 && daysAvailable.includes(`${day}`)) {
-                return <div className={styles.day} style={{ gridColumnStart: firstDayOfWeek + 1 }}>{day}</div>
+                return <div className={styles.day} key={day} style={{ gridColumnStart: firstDayOfWeek + 1 }}>{day}</div>
               } else if (!daysAvailable.includes(`${day}`)) {
-                return <div className={styles.day} style={{ backgroundColor: "grey" }}>{day}</div>
+                return <div className={styles.day} key={day} style={{ backgroundColor: "grey" }}>{day}</div>
               } else {
-                return <div className={styles.day}>{day}</div>
+                return <div className={styles.day} key={day}>{day}</div>
               }
             })()
           )}

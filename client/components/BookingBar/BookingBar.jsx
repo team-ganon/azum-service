@@ -27,7 +27,7 @@ class BookingBar extends Component {
   componentDidMount() {
     axios.get(`/api/rentals${window.location.pathname}`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         const data = res.data;
         this.setState({
           price: data.price,
