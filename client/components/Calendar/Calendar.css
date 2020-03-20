@@ -1,0 +1,78 @@
+.wrapper {
+  margin-top: 25px;
+}
+
+.header {
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 40px);
+  grid-template-rows: 30px 30px repeat(6, 40px);
+  grid-template-areas:
+    "left-arrow date date date date date right-arrow"
+    ". . . . . . ."
+    ". . . . . . ."
+    ". . . . . . ."
+    ". . . . . . ."
+    ". . . . . . ."
+    ". . . . . . ."
+    ". . . . . . .";
+  grid-gap: 0px;
+  width: min-content;
+  height: min-content;
+}
+
+.whitespace {
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+.dayOfWeek {
+  text-align: center;
+}
+
+.day {
+  box-sizing: border-box;
+  padding: 1px;
+  color: rgb(72, 72, 72);
+  background-color: white;
+  /* border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray; */
+  border: 1px solid #e4e4e4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.day:hover {
+  background-color: #e4e4e4;
+}
+
+.day:focus {
+  background-color: cyan;
+}
+
+.date {
+  grid-area: date;
+  text-align: center;
+  font-weight: bold;
+}
+
+.left_arrow {
+  grid-area: left-arrow;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+}
+
+.right_arrow {
+  grid-area: right-arrow;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+}
+
+#day1 {
+  grid-column-start: 2;
+}

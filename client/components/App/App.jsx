@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
+import styles from "./App.css";
 
-import BookingBar from "../Booking/Bar/Bar.jsx";
+import BookingBar from "../BookingBar/BookingBar.jsx";
+import Calendar from "../Calendar/Calendar.jsx";
 
 class App extends Component {
   render() {
     return (
-        <div className="app">
+      <div>
+        <div className={styles.app}>
           <BookingBar />
         </div>
+      </div>
     );
   }
 }

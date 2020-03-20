@@ -1,0 +1,30 @@
+.wrapper {
+  width: 376px;
+  height: 516px;
+  background: white;
+  padding: 0px 24px;
+  border: 1px solid #e4e4e4;
+}
+
+.price-calc {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.title {
+  flex-basis: 75%;
+  border-bottom: 1px solid #e4e4e4;
+  vertical-align: middle;
+}
+
+.description {
+  flex-basis: 25%;
+  margin-left: auto;
+  text-align: right;
+  border-bottom: 1px solid #e4e4e4;
+  vertical-align: middle;
+}
+
+.total {
+  font-weight: bold;
+}
