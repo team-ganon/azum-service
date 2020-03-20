@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { shallow, configure } from "enzyme";
 
 import App from "./App.jsx";
-import BookingBar from "../Booking/Bar/Bar.jsx";
+import BookingBar from "../BookingBar/BookingBar.jsx";
 
 describe("App", () => {
   test("renders properly", () => {

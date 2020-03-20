@@ -77,8 +77,6 @@ class Calendar extends Component {
       }
     });
 
-    console.log(daysAvailable);
-
     return (
       <div class={styles.wrapper}>
         <div className={styles.grid}>
