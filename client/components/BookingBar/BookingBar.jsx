@@ -25,6 +25,7 @@ class BookingBar extends Component {
   }
 
   componentDidMount() {
+    const queryString = window.location.pathname.slice(1);
     axios.get(`/api/rentals${window.location.pathname}`)
       .then(res => {
         // console.log(res);
