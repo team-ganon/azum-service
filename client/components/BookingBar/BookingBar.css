@@ -85,13 +85,13 @@
 
 #dateBar .calendarPopup {
   visibility: hidden;
-  width: 300px;
+  background-color: white;
+  width: 100%;
+  border: 1px solid black;
   border-radius: 6px;
   padding: 8px 0;
   position: absolute;
   z-index: 1;
   top: 125%;
-  left: 50%;
-  margin-left: 150px;
 }
 

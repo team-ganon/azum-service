@@ -24,20 +24,13 @@ class BookingBar extends Component {
       availability: []
     };
 
-    this.calendarPopupRef = React.createRef();
-
     this.handlePopup = this.handlePopup.bind(this);
   }
 
   handlePopup() {
-    console.log(this.calendarPopupRef.current.style.visibility);
-    if(this.calendarPopupRef.current.style.visibility === "hidden" || this.calendarPopupRef.current.style.visibility === "") {
-      this.calendarPopupRef.current.style.visibility = "visible";
-    } else {
-      this.calendarPopupRef.current.style.visibility = "hidden";
-    }
-    console.log(this.calendarPopupRef.current.style.visibility);
-    // console.log(this.calendarPopupRef.current);
+    this.setState((prevState, props) => ({
+      showCalendar: !prevState.showCalendar
+    }));
   }
 
   componentDidMount() {
@@ -68,7 +61,10 @@ class BookingBar extends Component {
   }
 
   render() {
-    const { price, max_guest, reviews, fees, availability } = this.state;
+    const { showCalendar, price, max_guest, reviews, fees, availability } = this.state;
+
+    const calendarPopupStyle = showCalendar ? { visibility: "visible" } : { visibility: "hidden" };
+
     return (
       <div>
         <div className={styles.wrapper}>
@@ -84,8 +80,8 @@ class BookingBar extends Component {
               <div id={styles.startDate} onClick={this.handlePopup}>03/20/2020</div>
               <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
               <div id={styles.endDate} onClick={this.handlePopup}>03/27/2020</div>
-              <div className={styles.calendarPopup} id="calendarPopup" ref={this.calendarPopupRef}>
-                Hello guys you can see me now
+              <div className={styles.calendarPopup} id="calendarPopup" style={calendarPopupStyle}>
+                <Calendar availability={availability}/>
               </div>
             </div>
           </div>
@@ -103,7 +99,6 @@ class BookingBar extends Component {
             <p className={`${styles.description} ${styles.total}`}>${1000 + fees.cleaning_fee + fees.service_fee + fees.occupancy_fee}</p>
           </div>
         </div>
-        <Calendar availability={availability}/>
       </div>
     );
   }

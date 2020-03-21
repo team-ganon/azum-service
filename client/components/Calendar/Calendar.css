@@ -1,5 +1,5 @@
 .wrapper {
-  margin-top: 25px;
+  margin-top: 5px;
 }
 
 .header {
@@ -22,6 +22,7 @@
   grid-gap: 0px;
   width: min-content;
   height: min-content;
+  margin: 0 auto;
 }
 
 .whitespace {
