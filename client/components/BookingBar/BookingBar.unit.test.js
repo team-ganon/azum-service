@@ -11,6 +11,4 @@ describe("Booking Bar", () => {
     ReactDOM.render(<BookingBar />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
-
-
 });

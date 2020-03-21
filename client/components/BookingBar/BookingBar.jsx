@@ -74,7 +74,7 @@ class BookingBar extends Component {
             <span id={styles.avgStars}><b> {reviews.avgStars} </b></span>
             <span id={styles.numReviews}>({reviews.numReviews} reviews)</span>
           </p>
-          <div className="date">
+          <div className={styles.date}>
             <h3>Dates</h3>
             <div id={styles.dateBar}>
               <div id={styles.startDate} onClick={this.handlePopup}>03/20/2020</div>
