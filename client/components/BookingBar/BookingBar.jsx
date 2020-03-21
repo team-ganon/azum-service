@@ -9,6 +9,7 @@ class BookingBar extends Component {
     super(props);
 
     this.state = {
+      showCalendar: false,
       price: null,
       max_guests: null,
       reviews: {
@@ -22,6 +23,21 @@ class BookingBar extends Component {
       },
       availability: []
     };
+
+    this.calendarPopupRef = React.createRef();
+
+    this.handlePopup = this.handlePopup.bind(this);
+  }
+
+  handlePopup() {
+    console.log(this.calendarPopupRef.current.style.visibility);
+    if(this.calendarPopupRef.current.style.visibility === "hidden" || this.calendarPopupRef.current.style.visibility === "") {
+      this.calendarPopupRef.current.style.visibility = "visible";
+    } else {
+      this.calendarPopupRef.current.style.visibility = "hidden";
+    }
+    console.log(this.calendarPopupRef.current.style.visibility);
+    // console.log(this.calendarPopupRef.current);
   }
 
   componentDidMount() {
@@ -65,9 +81,12 @@ class BookingBar extends Component {
           <div className="date">
             <h3>Dates</h3>
             <div id={styles.dateBar}>
-              <div id={styles.startDate}>03/20/2020</div>
+              <div id={styles.startDate} onClick={this.handlePopup}>03/20/2020</div>
               <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
-              <div id={styles.endDate}>03/27/2020</div>
+              <div id={styles.endDate} onClick={this.handlePopup}>03/27/2020</div>
+              <div className={styles.calendarPopup} id="calendarPopup" ref={this.calendarPopupRef}>
+                Hello guys you can see me now
+              </div>
             </div>
           </div>
           <h3>Guests</h3>
