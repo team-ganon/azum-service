@@ -8,7 +8,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-.price-calc {
+.priceCalc {
   display: flex;
   flex-wrap: wrap;
 }
@@ -47,7 +47,7 @@
   font-size: 22px;
 }
 
-#per-night {
+#perNight{
   font-size: 12px;
 }
 
@@ -55,29 +55,30 @@
   font-size: 12px;
 }
 
-#avg-stars {
+#avgStars {
   color: #484848;
 }
 
-#num-reviews {
+#numReviews {
   color: #767676;
 }
 
-#date-bar {
+#dateBar {
   display: flex;
-
+  position: relative;
+  user-select: none;
   border: 1px solid salmon;
 }
 
-#start-date, #end-date {
+#startDate, #endDate {
   width: 150px;
   border: 1px solid black;
 }
 
-#start-date {
+#startDate {
   margin-right: auto;
 }
 
-#end-date {
+#endDate {
   margin-left: auto;
 }

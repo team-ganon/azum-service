@@ -56,22 +56,22 @@ class BookingBar extends Component {
     return (
       <div>
         <div className={styles.wrapper}>
-          <h1 id={styles.price}>${price} <span id={styles["per-night"]}>per night</span></h1>
+          <h1 id={styles.price}>${price} <span id={styles.perNight}>per night</span></h1>
           <p className={styles.reviews}>
             <img src="./img/star.svg" alt="star" className={styles.star}></img>
-            <span id={styles["avg-stars"]}><b> {reviews.avgStars} </b></span>
-            <span id={styles["num-reviews"]}>({reviews.numReviews} reviews)</span>
+            <span id={styles.avgStars}><b> {reviews.avgStars} </b></span>
+            <span id={styles.numReviews}>({reviews.numReviews} reviews)</span>
           </p>
           <div className="date">
             <h3>Dates</h3>
-            <div id={styles["date-bar"]}>
-              <div id={styles["start-date"]}>03/20/2020</div>
+            <div id={styles.dateBar}>
+              <div id={styles.startDate}>03/20/2020</div>
               <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
-              <div id={styles["end-date"]}>03/27/2020</div>
+              <div id={styles.endDate}>03/27/2020</div>
             </div>
           </div>
           <h3>Guests</h3>
-          <div className={styles["price-calc"]}>
+          <div className={styles.priceCalc}>
             <p className={styles.title}>${price} x 7 nights</p>
             <p className={styles.description}>$1000</p>
             <p className={styles.title}>Cleaning fee</p>
