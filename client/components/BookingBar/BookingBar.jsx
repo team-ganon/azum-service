@@ -56,9 +56,20 @@ class BookingBar extends Component {
     return (
       <div>
         <div className={styles.wrapper}>
-          <h1>${price} per night</h1>
-          <p><b>{reviews.avgStars}</b> ({reviews.numReviews} reviews)</p>
-          <h3>Dates</h3>
+          <h1 id={styles.price}>${price} <span id={styles["per-night"]}>per night</span></h1>
+          <p className={styles.reviews}>
+            <img src="./img/star.svg" alt="star" className={styles.star}></img>
+            <span id={styles["avg-stars"]}><b> {reviews.avgStars} </b></span>
+            <span id={styles["num-reviews"]}>({reviews.numReviews} reviews)</span>
+          </p>
+          <div className="date">
+            <h3>Dates</h3>
+            <div id={styles["date-bar"]}>
+              <div id={styles["start-date"]}>03/20/2020</div>
+              <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
+              <div id={styles["end-date"]}>03/27/2020</div>
+            </div>
+          </div>
           <h3>Guests</h3>
           <div className={styles["price-calc"]}>
             <p className={styles.title}>${price} x 7 nights</p>
