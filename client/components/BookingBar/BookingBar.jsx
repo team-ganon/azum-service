@@ -68,24 +68,33 @@ class BookingBar extends Component {
     return (
       <div>
         <div className={styles.wrapper}>
-          <h1 id={styles.price}>${price} <span id={styles.perNight}>per night</span></h1>
+          <h1 className={styles.price}>${price} <span className={styles.perNight}>per night</span></h1>
           <p className={styles.reviews}>
             <img src="./img/star.svg" alt="star" className={styles.star}></img>
-            <span id={styles.avgStars}><b> {reviews.avgStars} </b></span>
-            <span id={styles.numReviews}>({reviews.numReviews} reviews)</span>
+            <span className={styles.avgStars}><b> {reviews.avgStars} </b></span>
+            <span className={styles.numReviews}>({reviews.numReviews} reviews)</span>
           </p>
-          <div className={styles.date}>
-            <h3>Dates</h3>
-            <div id={styles.dateBar}>
-              <div id={styles.startDate} onClick={this.handlePopup}>03/20/2020</div>
+          <div className={styles.barWrapper}>
+            <h3 className={styles.barTitle}>Dates</h3>
+            <div className={styles.dateBar}>
+              <div className={styles.startDate} onClick={this.handlePopup}>
+                <div className={styles.startDateText}>03/20/2020</div>
+              </div>
               <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
-              <div id={styles.endDate} onClick={this.handlePopup}>03/27/2020</div>
-              <div className={styles.calendarPopup} id="calendarPopup" style={calendarPopupStyle}>
+              <div className={styles.endDate} onClick={this.handlePopup}>
+                <div className={styles.endDateText}>03/27/2020</div>
+              </div>
+              <div className={styles.calendarPopup} style={calendarPopupStyle}>
                 <Calendar availability={availability}/>
               </div>
             </div>
           </div>
-          <h3>Guests</h3>
+          <div className={styles.barWrapper}>
+            <h3 className={styles.barTitle}>Guests</h3>
+            <div className={styles.dateBar}>
+
+            </div>
+          </div>
           <div className={styles.priceCalc}>
             <p className={styles.title}>${price} x 7 nights</p>
             <p className={styles.description}>$1000</p>
