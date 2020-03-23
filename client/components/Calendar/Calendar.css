@@ -2,16 +2,12 @@
   margin-top: 5px;
 }
 
-.header {
-  text-align: center;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 40px);
   grid-template-rows: 30px 30px repeat(6, 40px);
   grid-template-areas:
-    "left-arrow date date date date date right-arrow"
+    "header header header header header header header"
     ". . . . . . ."
     ". . . . . . ."
     ". . . . . . ."
@@ -31,7 +27,13 @@
 }
 
 .dayOfWeek {
-  text-align: center;
+  color: #757575;
+  font-size: 12px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 5px;
 }
 
 .day {
@@ -56,22 +58,56 @@
   background-color: cyan;
 }
 
+.header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .date {
-  grid-area: date;
-  text-align: center;
+  height: 100%;
+  /* width: 100%; */
+
   font-weight: bold;
+  color: #484848;
+  font-size: 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
-.left_arrow {
-  grid-area: left-arrow;
+.leftArrowContainer, .rightArrowContainer {
+  height: 33px;
+  width: 39px;
+
   border: 1px solid #e4e4e4;
   border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
-.right_arrow {
-  grid-area: right-arrow;
-  border: 1px solid #e4e4e4;
-  border-radius: 5px;
+.leftArrowContainer {
+  margin-right: auto;
+}
+
+.rightArrowContainer {
+  margin-left: auto;
+}
+
+.leftArrow, .rightArrow {
+  height: 19px;
+  width: 19px;
+  filter: invert(56%) sepia(5%) saturate(347%) hue-rotate(149deg) brightness(95%) contrast(85%);
+}
+
+.leftArrow {
+  transform: rotate(180deg);
 }
 
 #day1 {
