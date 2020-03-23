@@ -97,13 +97,13 @@ class Calendar extends Component {
           {days.map(day =>
             (() => {
               if (day === 1 && !daysAvailable.includes(`${day}`)) {
-                return <div className={styles.day} key={day} style={{ gridColumnStart: firstDayOfWeek + 1, backgroundColor: "grey" }}>{day}</div>
+                return <div className={styles.day} key={day} style={{ gridColumnStart: firstDayOfWeek + 1, textDecoration: "line-through", color: "#e4e4e4" }}>{day}</div>
               } else if (day === 1 && daysAvailable.includes(`${day}`)) {
-                return <div className={styles.day} key={day} style={{ gridColumnStart: firstDayOfWeek + 1 }}>{day}</div>
+                return <div className={`${styles.day} ${styles.dayAvailable}`} key={day} style={{ gridColumnStart: firstDayOfWeek + 1 }}>{day}</div>
               } else if (!daysAvailable.includes(`${day}`)) {
-                return <div className={styles.day} key={day} style={{ backgroundColor: "grey" }}>{day}</div>
+                return <div className={styles.day} key={day} style={{ textDecoration: "line-through", color: "#e4e4e4" }}>{day}</div>
               } else {
-                return <div className={styles.day} key={day}>{day}</div>
+                return <div className={`${styles.day} ${styles.dayAvailable}`} key={day}>{day}</div>
               }
             })()
           )}

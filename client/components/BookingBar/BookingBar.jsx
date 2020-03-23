@@ -64,6 +64,7 @@ class BookingBar extends Component {
     const { showCalendar, price, max_guest, reviews, fees, availability } = this.state;
 
     const calendarPopupStyle = showCalendar ? { visibility: "visible" } : { visibility: "hidden" };
+    const highlightDateStyle = showCalendar ? styles.highlightDate : "";
 
     return (
       <div>
@@ -78,14 +79,14 @@ class BookingBar extends Component {
             <h3 className={styles.barTitle}>Dates</h3>
             <div className={styles.dateBar}>
               <div className={styles.startDate} onClick={this.handlePopup}>
-                <div className={styles.startDateText}>03/20/2020</div>
+                <div className={`${styles.startDateText} ${highlightDateStyle}`}>03/20/2020</div>
               </div>
               <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
               <div className={styles.endDate} onClick={this.handlePopup}>
-                <div className={styles.endDateText}>03/27/2020</div>
+                <div className={`${styles.endDateText} ${highlightDateStyle}`}>03/27/2020</div>
               </div>
               <div className={styles.calendarPopup} style={calendarPopupStyle}>
-                <Calendar availability={availability}/>
+                <Calendar className={styles.calendar} availability={availability}/>
               </div>
             </div>
           </div>
