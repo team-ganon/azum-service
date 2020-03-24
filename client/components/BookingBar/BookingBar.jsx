@@ -33,13 +33,18 @@ class BookingBar extends Component {
 
   handlePopup(e) {
     let id = e.target.id;
-    if (this.state.clickedDate !== null) {
+    if (this.state.clickedDate === id) {
+      id = null;
+      this.setState((prevState, props) => ({
+        showCalendar: !prevState.showCalendar,
+        clickedDate: id
+      }));
+    } else if (this.state.clickedDate !== null) {
       this.setState((prevState, props) => ({
         showCalendar: prevState.showCalendar,
         clickedDate: id
       }));
     } else {
-      id = (this.state.clickedDate === e.target.id) ? null : id;
       this.setState((prevState, props) => ({
         showCalendar: !prevState.showCalendar,
         clickedDate: id
