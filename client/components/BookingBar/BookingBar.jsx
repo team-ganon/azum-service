@@ -9,6 +9,10 @@ class BookingBar extends Component {
     super(props);
 
     this.state = {
+      daySelected: null,
+      showGuestBar: false,
+      showCalendar: false,
+      clickedDate: null,
       price: null,
       max_guests: null,
       reviews: {
@@ -22,6 +26,25 @@ class BookingBar extends Component {
       },
       availability: []
     };
+
+    this.handlePopup = this.handlePopup.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handlePopup(e) {
+    let id = e.target.id;
+    if (this.state.clickedDate !== null) {
+      this.setState((prevState, props) => ({
+        showCalendar: prevState.showCalendar,
+        clickedDate: id
+      }));
+    } else {
+      id = (this.state.clickedDate === e.target.id) ? null : id;
+      this.setState((prevState, props) => ({
+        showCalendar: !prevState.showCalendar,
+        clickedDate: id
+      }));
+    }
   }
 
   componentDidMount() {
@@ -51,16 +74,65 @@ class BookingBar extends Component {
       });
   }
 
+  handleClick(e) {
+    const id = e.target.id;
+    this.setState({
+      daySelected: id
+    });
+  }
+
   render() {
-    const { price, max_guest, reviews, fees, availability } = this.state;
+    const { daySelected, showCalendar, clickedDate, price, max_guest, reviews, fees, availability } = this.state;
+
+    const calendarPopupStyle = showCalendar ? { visibility: "visible" } : { visibility: "hidden" };
+    // const guestPopupStyle = showGuestBar ? { visibility: "visible" } : { visibility: "hidden" };
+
+    let highlightStartDateStyle = "";
+    let highlightEndDateStyle = "";
+    if (clickedDate === "startDate") {
+      highlightStartDateStyle = styles.highlightDate;
+    } else if (clickedDate === "endDate") {
+      highlightEndDateStyle = styles.highlightDate;
+    }
+
     return (
       <div>
         <div className={styles.wrapper}>
-          <h1>${price} per night</h1>
-          <p><b>{reviews.avgStars}</b> ({reviews.numReviews} reviews)</p>
-          <h3>Dates</h3>
-          <h3>Guests</h3>
-          <div className={styles["price-calc"]}>
+          <h1 className={styles.price}>${price} <span className={styles.perNight}>per night</span></h1>
+          <p className={styles.reviews}>
+            <img src="./img/star.svg" alt="star" className={styles.star}></img>
+            <span className={styles.avgStars}><b> {reviews.avgStars} </b></span>
+            <span className={styles.numReviews}>({reviews.numReviews} reviews)</span>
+          </p>
+          <div className={styles.barWrapper}>
+            <h3 className={styles.barTitle}>Dates</h3>
+            <div className={styles.bar}>
+              <div className={styles.startDate}>
+                <div className={`${styles.startDateText} ${highlightStartDateStyle}`} onClick={this.handlePopup} id="startDate">03/20/2020</div>
+              </div>
+              <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
+              <div className={styles.endDate}>
+                <div className={`${styles.endDateText} ${highlightEndDateStyle}`} onClick={this.handlePopup} id="endDate">03/27/2020</div>
+              </div>
+              <div className={styles.calendarPopup} style={calendarPopupStyle}>
+                <Calendar className={styles.calendar} availability={availability} handleClick={this.handleClick}/>
+              </div>
+            </div>
+          </div>
+          <div className={styles.barWrapper}>
+            <h3 className={styles.barTitle}>Guests</h3>
+            <div className={styles.bar}>
+              <div className={styles.guestBarText}>
+                1 guest
+              </div>
+              <div className={styles.guestBarPopup}>
+                <div>Adults</div>
+                <div>Children</div>
+                <div>Infants</div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.priceCalc}>
             <p className={styles.title}>${price} x 7 nights</p>
             <p className={styles.description}>$1000</p>
             <p className={styles.title}>Cleaning fee</p>
@@ -73,7 +145,6 @@ class BookingBar extends Component {
             <p className={`${styles.description} ${styles.total}`}>${1000 + fees.cleaning_fee + fees.service_fee + fees.occupancy_fee}</p>
           </div>
         </div>
-        <Calendar availability={availability}/>
       </div>
     );
   }

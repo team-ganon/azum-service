@@ -60,7 +60,7 @@ class Calendar extends Component {
 
   render() {
     const { currentYear, currentMonth, currentMonthString, firstDayOfWeek, numDays } = this.state;
-    const { availability } = this.props;
+    const { availability, handleClick } = this.props;
 
     const days = [];
     for(let i = 1; i <= numDays; i++) {
@@ -80,14 +80,16 @@ class Calendar extends Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.grid}>
-          <div className={styles.left_arrow} onClick={this.changeMonth} id="left">
-            left
-          </div>
-          <div className={styles.date}>
-            {`${currentMonthString} ${currentYear}`}
-          </div>
-          <div className={styles.right_arrow} onClick={this.changeMonth} id="right">
-            right
+          <div className={styles.header}>
+            <div className={styles.leftArrowContainer} onClick={this.changeMonth} id="left">
+              <img className={styles.leftArrow} src="./img/arrow.svg" alt="arrow"></img>
+            </div>
+            <div className={styles.date}>
+              {`${currentMonthString} ${currentYear}`}
+            </div>
+            <div className={styles.rightArrowContainer} onClick={this.changeMonth} id="right">
+              <img className={styles.rightArrow} src="./img/arrow.svg" alt="arrow"></img>
+            </div>
           </div>
           {daysOfWeek.map(dayOfWeek =>
             <div className={styles.dayOfWeek} key={dayOfWeek}>{dayOfWeek}</div>
@@ -95,13 +97,13 @@ class Calendar extends Component {
           {days.map(day =>
             (() => {
               if (day === 1 && !daysAvailable.includes(`${day}`)) {
-                return <div className={styles.day} key={day} style={{ gridColumnStart: firstDayOfWeek + 1, backgroundColor: "grey" }}>{day}</div>
+                return <div className={styles.day} key={day} style={{ gridColumnStart: firstDayOfWeek + 1, textDecoration: "line-through", color: "#e4e4e4" }}>{day}</div>
               } else if (day === 1 && daysAvailable.includes(`${day}`)) {
-                return <div className={styles.day} key={day} style={{ gridColumnStart: firstDayOfWeek + 1 }}>{day}</div>
+                return <div className={`${styles.day} ${styles.dayAvailable}`} key={day} style={{ gridColumnStart: firstDayOfWeek + 1 }} onClick={handleClick}>{day}</div>
               } else if (!daysAvailable.includes(`${day}`)) {
-                return <div className={styles.day} key={day} style={{ backgroundColor: "grey" }}>{day}</div>
+                return <div className={styles.day} key={day} style={{ textDecoration: "line-through", color: "#e4e4e4" }}>{day}</div>
               } else {
-                return <div className={styles.day} key={day}>{day}</div>
+                return <div className={`${styles.day} ${styles.dayAvailable}`} key={day} onClick={handleClick}>{day}</div>
               }
             })()
           )}

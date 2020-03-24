@@ -1,30 +1,167 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
 .wrapper {
   width: 376px;
-  height: 516px;
+  height: 518px;
   background: white;
-  padding: 0px 24px;
+  padding: 18px 24px;
   border: 1px solid #e4e4e4;
+  font-family: "Poppins", sans-serif;
 }
 
-.price-calc {
+.priceCalc {
   display: flex;
   flex-wrap: wrap;
+  font-size: 14px;
 }
 
 .title {
+  color: #484848;
   flex-basis: 75%;
   border-bottom: 1px solid #e4e4e4;
   vertical-align: middle;
+  padding: 1em 0;
 }
 
 .description {
+  color: #484848;
   flex-basis: 25%;
   margin-left: auto;
   text-align: right;
+  padding: 1em 0;
   border-bottom: 1px solid #e4e4e4;
   vertical-align: middle;
 }
 
 .total {
   font-weight: bold;
+  border-bottom: none;
 }
+
+.arrow {
+  height: 24px;
+  width: 24px;
+  align-self: center;
+  user-select: none;
+  filter: invert(27%) sepia(0%) saturate(0%) hue-rotate(241deg) brightness(93%) contrast(88%);
+}
+
+.star {
+  height: 10px;
+  width: 10px;
+  filter: invert(36%) sepia(20%) saturate(3730%) hue-rotate(147deg) brightness(98%) contrast(101%);
+  user-select: none;
+}
+
+.price {
+  color: #484848;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 0.3em;
+}
+
+.perNight {
+  font-size: 12px;
+}
+
+.reviews {
+  font-size: 12px;
+  padding-bottom: 1.3em;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.avgStars {
+  color: #484848;
+}
+
+.numReviews {
+  color: #767676;
+}
+
+.barWrapper {
+  padding-top: 1.3em;
+  color: #484848;
+}
+
+.barTitle {
+  font-size: 12px;
+  margin-bottom: 0.5em;
+}
+
+.bar {
+  display: flex;
+  position: relative;
+  border: 1px solid #e4e4e4;
+  font-size: 16px;
+  height: 43px;
+}
+
+.guestBarText {
+  padding: 5px;
+}
+
+.startDate, .endDate {
+  width: 150px;
+  padding: 0.55em 0em 0.45em 0.6em;
+}
+
+.highlightDate {
+  background-color: #99EDE6;
+  color: #007A87;
+  border-radius: 5px;
+}
+
+.startDate {
+  margin-right: auto;
+
+}
+
+.startDateText, .endDateText {
+  padding: 5px;
+  margin: 0 7px;
+}
+
+.endDate {
+  margin-left: auto;
+}
+
+.bar .calendarPopup {
+  visibility: hidden;
+  background-color: white;
+  width: 100%;
+  border: 1px solid #e4e4e4;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  top: 125%;
+}
+
+.calendarPopup::before {
+  content: "";
+  position: absolute;
+  top: calc(0% - 1px);
+  left: 50%;
+  border-width: 10px;
+  margin-top: -20px;
+  border-style: solid;
+  border-color: transparent transparent #e4e4e4 transparent;
+}
+
+.calendarPopup::after {
+  content: "";
+  position: absolute;
+  top: calc(0%);
+  left: 50%;
+  border-width: 10px;
+  margin-top: -20px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+
+.clicked {
+  background: #00A699;
+  border-color: #00A699;
+  color: white;
+}
+
