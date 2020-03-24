@@ -88,11 +88,16 @@
   margin-bottom: 0.5em;
 }
 
-.dateBar {
+.bar {
   display: flex;
   position: relative;
   border: 1px solid #e4e4e4;
   font-size: 16px;
+  height: 43px;
+}
+
+.guestBarText {
+  padding: 5px;
 }
 
 .startDate, .endDate {
@@ -108,6 +113,7 @@
 
 .startDate {
   margin-right: auto;
+
 }
 
 .startDateText, .endDateText {
@@ -119,7 +125,7 @@
   margin-left: auto;
 }
 
-.dateBar .calendarPopup {
+.bar .calendarPopup {
   visibility: hidden;
   background-color: white;
   width: 100%;
@@ -151,5 +157,11 @@
   margin-top: -20px;
   border-style: solid;
   border-color: transparent transparent white transparent;
+}
+
+.clicked {
+  background: #00A699;
+  border-color: #00A699;
+  color: white;
 }
 

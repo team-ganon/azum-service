@@ -60,7 +60,7 @@ class Calendar extends Component {
 
   render() {
     const { currentYear, currentMonth, currentMonthString, firstDayOfWeek, numDays } = this.state;
-    const { availability } = this.props;
+    const { availability, handleClick } = this.props;
 
     const days = [];
     for(let i = 1; i <= numDays; i++) {
@@ -99,11 +99,11 @@ class Calendar extends Component {
               if (day === 1 && !daysAvailable.includes(`${day}`)) {
                 return <div className={styles.day} key={day} style={{ gridColumnStart: firstDayOfWeek + 1, textDecoration: "line-through", color: "#e4e4e4" }}>{day}</div>
               } else if (day === 1 && daysAvailable.includes(`${day}`)) {
-                return <div className={`${styles.day} ${styles.dayAvailable}`} key={day} style={{ gridColumnStart: firstDayOfWeek + 1 }}>{day}</div>
+                return <div className={`${styles.day} ${styles.dayAvailable}`} key={day} style={{ gridColumnStart: firstDayOfWeek + 1 }} onClick={handleClick}>{day}</div>
               } else if (!daysAvailable.includes(`${day}`)) {
                 return <div className={styles.day} key={day} style={{ textDecoration: "line-through", color: "#e4e4e4" }}>{day}</div>
               } else {
-                return <div className={`${styles.day} ${styles.dayAvailable}`} key={day}>{day}</div>
+                return <div className={`${styles.day} ${styles.dayAvailable}`} key={day} onClick={handleClick}>{day}</div>
               }
             })()
           )}

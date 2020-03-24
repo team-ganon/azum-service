@@ -9,7 +9,10 @@ class BookingBar extends Component {
     super(props);
 
     this.state = {
+      daySelected: null,
+      showGuestBar: false,
       showCalendar: false,
+      clickedDate: null,
       price: null,
       max_guests: null,
       reviews: {
@@ -25,12 +28,23 @@ class BookingBar extends Component {
     };
 
     this.handlePopup = this.handlePopup.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handlePopup() {
-    this.setState((prevState, props) => ({
-      showCalendar: !prevState.showCalendar
-    }));
+  handlePopup(e) {
+    let id = e.target.id;
+    if (this.state.clickedDate !== null) {
+      this.setState((prevState, props) => ({
+        showCalendar: prevState.showCalendar,
+        clickedDate: id
+      }));
+    } else {
+      id = (this.state.clickedDate === e.target.id) ? null : id;
+      this.setState((prevState, props) => ({
+        showCalendar: !prevState.showCalendar,
+        clickedDate: id
+      }));
+    }
   }
 
   componentDidMount() {
@@ -60,11 +74,26 @@ class BookingBar extends Component {
       });
   }
 
+  handleClick(e) {
+    const id = e.target.id;
+    this.setState({
+      daySelected: id
+    });
+  }
+
   render() {
-    const { showCalendar, price, max_guest, reviews, fees, availability } = this.state;
+    const { daySelected, showCalendar, clickedDate, price, max_guest, reviews, fees, availability } = this.state;
 
     const calendarPopupStyle = showCalendar ? { visibility: "visible" } : { visibility: "hidden" };
-    const highlightDateStyle = showCalendar ? styles.highlightDate : "";
+    // const guestPopupStyle = showGuestBar ? { visibility: "visible" } : { visibility: "hidden" };
+
+    let highlightStartDateStyle = "";
+    let highlightEndDateStyle = "";
+    if (clickedDate === "startDate") {
+      highlightStartDateStyle = styles.highlightDate;
+    } else if (clickedDate === "endDate") {
+      highlightEndDateStyle = styles.highlightDate;
+    }
 
     return (
       <div>
@@ -77,23 +106,30 @@ class BookingBar extends Component {
           </p>
           <div className={styles.barWrapper}>
             <h3 className={styles.barTitle}>Dates</h3>
-            <div className={styles.dateBar}>
-              <div className={styles.startDate} onClick={this.handlePopup}>
-                <div className={`${styles.startDateText} ${highlightDateStyle}`}>03/20/2020</div>
+            <div className={styles.bar}>
+              <div className={styles.startDate}>
+                <div className={`${styles.startDateText} ${highlightStartDateStyle}`} onClick={this.handlePopup} id="startDate">03/20/2020</div>
               </div>
               <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
-              <div className={styles.endDate} onClick={this.handlePopup}>
-                <div className={`${styles.endDateText} ${highlightDateStyle}`}>03/27/2020</div>
+              <div className={styles.endDate}>
+                <div className={`${styles.endDateText} ${highlightEndDateStyle}`} onClick={this.handlePopup} id="endDate">03/27/2020</div>
               </div>
               <div className={styles.calendarPopup} style={calendarPopupStyle}>
-                <Calendar className={styles.calendar} availability={availability}/>
+                <Calendar className={styles.calendar} availability={availability} handleClick={this.handleClick}/>
               </div>
             </div>
           </div>
           <div className={styles.barWrapper}>
             <h3 className={styles.barTitle}>Guests</h3>
-            <div className={styles.dateBar}>
-
+            <div className={styles.bar}>
+              <div className={styles.guestBarText}>
+                1 guest
+              </div>
+              <div className={styles.guestBarPopup}>
+                <div>Adults</div>
+                <div>Children</div>
+                <div>Infants</div>
+              </div>
             </div>
           </div>
           <div className={styles.priceCalc}>
