@@ -96,8 +96,14 @@
   height: 43px;
 }
 
-.guestBarText {
+.guestBarTextContainer {
   padding: 5px;
+  padding-left: 23px;
+  height: 100%;
+  width: 100%;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
 }
 
 .startDate, .endDate {
@@ -108,7 +114,7 @@
 .highlightDate {
   background-color: #99EDE6;
   color: #007A87;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .startDate {
@@ -130,7 +136,7 @@
   background-color: white;
   width: 100%;
   border: 1px solid #e4e4e4;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 8px 0;
   position: absolute;
   z-index: 1;
@@ -165,3 +171,14 @@
   color: white;
 }
 
+.bar .guestBarPopup {
+  visibility: hidden;
+  background-color: white;
+  width: 100%;
+  border: 1px solid #e4e4e4;
+  border-radius: 4px;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  top: 95%;
+}

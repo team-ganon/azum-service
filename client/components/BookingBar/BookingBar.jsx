@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "./BookingBar.css";
 
 import Calendar from "../Calendar/Calendar.jsx";
+import GuestBar from "../GuestBar/GuestBar.jsx";
 
 class BookingBar extends Component {
   constructor(props) {
@@ -13,6 +14,9 @@ class BookingBar extends Component {
       showGuestBar: false,
       showCalendar: false,
       clickedDate: null,
+      numAdults: 1,
+      numChildren: 0,
+      numInfants: 0,
       price: null,
       max_guests: null,
       reviews: {
@@ -27,11 +31,14 @@ class BookingBar extends Component {
       availability: []
     };
 
-    this.handlePopup = this.handlePopup.bind(this);
+    this.handleCalendarPopup = this.handleCalendarPopup.bind(this);
+    this.handleGuestBarPopup = this.handleGuestBarPopup.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.onPlusClick = this.onPlusClick.bind(this);
+    this.onMinusClick = this.onMinusClick.bind(this);
   }
 
-  handlePopup(e) {
+  handleCalendarPopup(e) {
     let id = e.target.id;
     if (this.state.clickedDate === id) {
       id = null;
@@ -50,6 +57,34 @@ class BookingBar extends Component {
         clickedDate: id
       }));
     }
+  }
+
+  handleGuestBarPopup() {
+    console.log('handling');
+    this.setState((prevState, props) => ({
+      showGuestBar: !prevState.showGuestBar
+    }));
+  }
+
+  handleClick(e) {
+    const id = e.target.id;
+    this.setState({
+      daySelected: id
+    });
+  }
+
+  onPlusClick(e) {
+    const target = e.target.parentNode.id;
+    this.setState((prevState, props) => ({
+      [target]: prevState[target] + 1
+    }));
+  }
+
+  onMinusClick(e) {
+    const target = e.target.parentNode.id;
+    this.setState((prevState, props) => ({
+      [target]: prevState[target] - 1
+    }));
   }
 
   componentDidMount() {
@@ -79,18 +114,11 @@ class BookingBar extends Component {
       });
   }
 
-  handleClick(e) {
-    const id = e.target.id;
-    this.setState({
-      daySelected: id
-    });
-  }
-
   render() {
-    const { daySelected, showCalendar, clickedDate, price, max_guest, reviews, fees, availability } = this.state;
+    const { numAdults, numChildren, numInfants, daySelected, showCalendar, showGuestBar, clickedDate, price, max_guest, reviews, fees, availability } = this.state;
 
     const calendarPopupStyle = showCalendar ? { visibility: "visible" } : { visibility: "hidden" };
-    // const guestPopupStyle = showGuestBar ? { visibility: "visible" } : { visibility: "hidden" };
+    const guestBarPopupStyle = showGuestBar ? { visibility: "visible" } : { visibility: "hidden" };
 
     let highlightStartDateStyle = "";
     let highlightEndDateStyle = "";
@@ -113,11 +141,11 @@ class BookingBar extends Component {
             <h3 className={styles.barTitle}>Dates</h3>
             <div className={styles.bar}>
               <div className={styles.startDate}>
-                <div className={`${styles.startDateText} ${highlightStartDateStyle}`} onClick={this.handlePopup} id="startDate">03/20/2020</div>
+                <div className={`${styles.startDateText} ${highlightStartDateStyle}`} onClick={this.handleCalendarPopup} id="startDate">03/20/2020</div>
               </div>
               <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
               <div className={styles.endDate}>
-                <div className={`${styles.endDateText} ${highlightEndDateStyle}`} onClick={this.handlePopup} id="endDate">03/27/2020</div>
+                <div className={`${styles.endDateText} ${highlightEndDateStyle}`} onClick={this.handleCalendarPopup} id="endDate">03/27/2020</div>
               </div>
               <div className={styles.calendarPopup} style={calendarPopupStyle}>
                 <Calendar className={styles.calendar} availability={availability} handleClick={this.handleClick}/>
@@ -127,13 +155,11 @@ class BookingBar extends Component {
           <div className={styles.barWrapper}>
             <h3 className={styles.barTitle}>Guests</h3>
             <div className={styles.bar}>
-              <div className={styles.guestBarText}>
-                1 guest
+              <div className={styles.guestBarTextContainer} onClick={this.handleGuestBarPopup}>
+                <span className={styles.guestText}>1 guest</span>
               </div>
-              <div className={styles.guestBarPopup}>
-                <div>Adults</div>
-                <div>Children</div>
-                <div>Infants</div>
+              <div className={styles.guestBarPopup} style={guestBarPopupStyle}>
+                <GuestBar numAdults={numAdults} numChildren={numChildren} numInfants={numInfants} onPlusClick={this.onPlusClick} onMinusClick={this.onMinusClick} />
               </div>
             </div>
           </div>

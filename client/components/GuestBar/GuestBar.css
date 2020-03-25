@@ -1,0 +1,46 @@
+.bar {
+  position: relative;
+  height: 100%;
+  font-size: 16px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.bar::before {
+  position: absolute;
+  content: "";
+  top: -1%;
+  left: 0%;
+  width: 100%;
+  border-top: 2px solid #00888C;
+  border-radius: 2px;
+}
+
+.bar:first-child {
+  padding-top: 25px;
+}
+
+.row {
+  padding-bottom: 15px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 50px;
+}
+
+.btn {
+  display: flex;
+}
+
+.minus, .plus {
+  /* padding: 5px; */
+  border: 2px solid #00888C;
+  /* border-radius: 50px; */
+}
+
+.minus {
+  margin-right: auto;
+}
+
+.plus {
+  margin-left: auto;
+}
