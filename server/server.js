@@ -11,18 +11,6 @@ var app = express();
 
 app.use(express.static(path.resolve(__dirname, "../public")));
 
-// app.get("/:id", (req, res) => {
-//   if(req.params.id >= 1 && req.params.id <= 100) {
-//     res.sendFile(path.join(__dirname, "../public/index.html"), err => {
-//       if (err) {
-//         console.log(err);
-//       }
-//     });
-//   } else {
-//     res.status(404).send("<h1>404 error: page not found</h1>");
-//   }
-// });
-
 app.get("/api/rentals", (req, res) => {
   const id = parseInt(req.query.id);
   Rental.findOne({ _id: id })
