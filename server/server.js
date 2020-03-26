@@ -24,7 +24,7 @@ app.get("/api/rentals", (req, res) => {
 
 app.get("/app.js", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../public/bundle.js"));
-})
+});
 
 app.listen(3003, err => {
   console.log("Listening on port 3003...");
