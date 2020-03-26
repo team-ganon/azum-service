@@ -25,4 +25,5 @@ build/
 dist/
 public/bundle.js
 
+# AWS private key
 azum-service.pem
