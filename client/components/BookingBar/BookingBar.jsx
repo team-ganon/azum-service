@@ -36,6 +36,7 @@ class BookingBar extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.onPlusClick = this.onPlusClick.bind(this);
     this.onMinusClick = this.onMinusClick.bind(this);
+    this.clearData = this.clearData.bind(this);
     this.updateGuestText = this.updateGuestText.bind(this);
   }
 
@@ -43,28 +44,37 @@ class BookingBar extends Component {
     let id = e.target.id;
     if (this.state.clickedDate === id) {
       id = null;
-      this.setState((prevState, props) => ({
-        showCalendar: !prevState.showCalendar,
-        clickedDate: id
-      }));
+      this.setState((prevState, props) => {
+        if (prevState.showGuestBar) {
+          return { showGuestBar: false, showCalendar: !prevState.showCalendar, clickedDate: id };
+        }
+        return { showCalendar: !prevState.showCalendar, clickedDate: id };
+      });
     } else if (this.state.clickedDate !== null) {
-      this.setState((prevState, props) => ({
-        showCalendar: prevState.showCalendar,
-        clickedDate: id
-      }));
+      this.setState((prevState, props) => {
+        if (prevState.showGuestBar) {
+          return { showGuestBar: false, showCalendar: prevState.showCalendar, clickedDate: id };
+        }
+        return { showCalendar: prevState.showCalendar, clickedDate: id };
+      });
     } else {
-      this.setState((prevState, props) => ({
-        showCalendar: !prevState.showCalendar,
-        clickedDate: id
-      }));
+      this.setState((prevState, props) => {
+        if (prevState.showGuestBar) {
+          return { showGuestBar: false, showCalendar: !prevState.showCalendar, clickedDate: id };
+        }
+        return { showCalendar: !prevState.showCalendar, clickedDate: id };
+      });
     }
   }
 
   handleGuestBarPopup() {
     console.log('handling');
-    this.setState((prevState, props) => ({
-      showGuestBar: !prevState.showGuestBar
-    }));
+    this.setState((prevState, props) => {
+      if(prevState.showCalendar) {
+        return { showCalendar: false, showGuestBar: !prevState.showGuestBar }
+      }
+      return { showGuestBar: !prevState.showGuestBar };
+    });
   }
 
   handleClick(e) {
@@ -143,6 +153,14 @@ class BookingBar extends Component {
     return ret;
   }
 
+  clearData() {
+    this.setState({
+      numAdults: 1,
+      numChildren: 0,
+      numInfants: 0,
+    });
+  }
+
   componentDidMount() {
     const url = window.location.href;
     const queryString = url.slice(url.indexOf("?"));
@@ -171,7 +189,7 @@ class BookingBar extends Component {
   }
 
   render() {
-    const { numAdults, numChildren, numInfants, daySelected, showCalendar, showGuestBar, clickedDate, price, max_guest, reviews, fees, availability } = this.state;
+    const { numAdults, numChildren, numInfants, daySelected, showCalendar, showGuestBar, clickedDate, price, max_guests, reviews, fees, availability } = this.state;
 
     const calendarPopupStyle = showCalendar ? { visibility: "visible" } : { visibility: "hidden" };
     const guestBarPopupStyle = showGuestBar ? { visibility: "visible" } : { visibility: "hidden" };
@@ -210,12 +228,12 @@ class BookingBar extends Component {
           </div>
           <div className={styles.barWrapper}>
             <h3 className={styles.barTitle}>Guests</h3>
-            <div className={styles.bar}>
+            <div className={`${styles.bar} ${styles.guestBar}`}>
               <div className={styles.guestBarTextContainer} onClick={this.handleGuestBarPopup}>
                 <span className={styles.guestText}>{this.updateGuestText()}</span>
               </div>
               <div className={styles.guestBarPopup} style={guestBarPopupStyle}>
-                <GuestBar numAdults={numAdults} numChildren={numChildren} numInfants={numInfants} onPlusClick={this.onPlusClick} onMinusClick={this.onMinusClick} />
+                <GuestBar max_guests={max_guests} numAdults={numAdults} numChildren={numChildren} numInfants={numInfants} onPlusClick={this.onPlusClick} onMinusClick={this.onMinusClick} clearData={this.clearData}/>
               </div>
             </div>
           </div>

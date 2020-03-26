@@ -4,6 +4,7 @@
   font-size: 16px;
   padding: 0 10px;
   box-sizing: border-box;
+  cursor: auto;
 }
 
 .bar::before {
@@ -25,10 +26,27 @@
   display: grid;
   grid-template-columns: 3fr 2fr;
   grid-template-rows: 50px;
+  grid-template-areas:
+    "title button"
+    "description button";
+}
+
+.title {
+  grid-area: title;
 }
 
 .btn {
   display: flex;
+  grid-area: button;
+}
+
+.description {
+  grid-area: description;
+  font-size: 14px;
+  padding-top: 10px;
+
+  display: flex;
+  align-items: flex-start;
 }
 
 .minus, .plus {
@@ -41,6 +59,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
+  user-select: none;
 }
 
 .minus {
@@ -54,11 +75,25 @@
 .num {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
+  align-items: center;
+  height: 32px;
+  font-weight: bold;
 }
 
 .minusSign, .plusSign {
   height: 12px;
   width: 12px;
   filter: invert(34%) sepia(88%) saturate(806%) hue-rotate(143deg) brightness(96%) contrast(101%);
+}
+
+.inactive {
+  border-color: #BEDADB;
+}
+
+.inactive .minusSign, .inactive .plusSign {
+  filter: invert(97%) sepia(5%) saturate(1118%) hue-rotate(140deg) brightness(92%) contrast(85%);
+}
+
+.explainer {
+  grid-column: 1 / span 2;
 }
