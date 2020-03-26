@@ -13,26 +13,38 @@ class GuestBar extends Component {
       <div className={styles.bar}>
         <div className={styles.row}>
           <div className={styles.title}>Adults</div>
-          <div className={styles.btn} id="numAdults">
-            <span className={styles.minus} onClick={onMinusClick}>-</span>
+          <div className={`${styles.btn} numAdults`}>
+            <span className={`${styles.minus} numAdults`} onClick={onMinusClick}>
+              <img className={styles.minusSign} src="./img/minus.svg" alt="minus sign"></img>
+            </span>
             <span className={styles.num}>{numAdults}</span>
-            <span className={styles.plus} onClick={onPlusClick}>+</span>
+            <span className={`${styles.plus} numAdults`} onClick={onPlusClick}>
+              <img className={styles.plusSign} src="./img/plus.svg" alt="plus sign"></img>
+            </span>
           </div>
         </div>
         <div className={styles.row}>
           <div className={styles.title}>Children</div>
-          <div className={styles.btn} id="numChildren">
-            <span className={styles.minus} onClick={onMinusClick}>-</span>
+          <div className={`${styles.btn} numChildren`}>
+            <span className={`${styles.minus} numChildren`} onClick={onMinusClick}>
+              <img className={styles.minusSign} src="./img/minus.svg" alt="minus sign"></img>
+            </span>
             <span className={styles.num}>{numChildren}</span>
-            <span className={styles.plus} onClick={onPlusClick}>+</span>
+            <span className={`${styles.plus} numChildren`} onClick={onPlusClick}>
+              <img className={styles.plusSign} src="./img/plus.svg" alt="plus sign"></img>
+            </span>
           </div>
         </div>
         <div className={styles.row}>
           <div className={styles.title}>Infants</div>
-          <div className={styles.btn} id="numInfants">
-            <span className={styles.minus} onClick={onMinusClick}>-</span>
+          <div className={`${styles.btn} numInfants`}>
+            <span className={`${styles.minus} numInfants`} onClick={onMinusClick}>
+              <img className={styles.minusSign} src="./img/minus.svg" alt="minus sign"></img>
+            </span>
             <span className={styles.num}>{numInfants}</span>
-            <span className={styles.plus} onClick={onPlusClick}>+</span>
+            <span className={`${styles.plus} numInfants`} onClick={onPlusClick}>
+              <img className={styles.plusSign} src="./img/plus.svg" alt="plus sign"></img>
+            </span>
           </div>
         </div>
       </div>

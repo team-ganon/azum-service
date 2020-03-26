@@ -33,8 +33,14 @@
 
 .minus, .plus {
   /* padding: 5px; */
-  border: 2px solid #00888C;
-  /* border-radius: 50px; */
+  height: 32px;
+  width: 32px;
+
+  border: 1px solid #00888C;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .minus {
@@ -43,4 +49,16 @@
 
 .plus {
   margin-left: auto;
+}
+
+.num {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.minusSign, .plusSign {
+  height: 12px;
+  width: 12px;
+  filter: invert(34%) sepia(88%) saturate(806%) hue-rotate(143deg) brightness(96%) contrast(101%);
 }

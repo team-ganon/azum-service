@@ -36,6 +36,7 @@ class BookingBar extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.onPlusClick = this.onPlusClick.bind(this);
     this.onMinusClick = this.onMinusClick.bind(this);
+    this.updateGuestText = this.updateGuestText.bind(this);
   }
 
   handleCalendarPopup(e) {
@@ -74,17 +75,72 @@ class BookingBar extends Component {
   }
 
   onPlusClick(e) {
-    const target = e.target.parentNode.id;
-    this.setState((prevState, props) => ({
-      [target]: prevState[target] + 1
-    }));
+    let target;
+    if(e.target.parentNode.classList.contains("numAdults")) {
+      target = "numAdults";
+    } else if (e.target.parentNode.classList.contains("numChildren")) {
+      target = "numChildren"
+    } else {
+      target = "numInfants"
+    }
+
+    if(target === "numInfants") {
+      if (this.state.numInfants < 5) {
+        this.setState((prevState, props) => ({
+          [target]: prevState[target] + 1
+        }));
+      }
+    } else {
+      if(this.state.numAdults + this.state.numChildren < this.state.max_guests) {
+        this.setState((prevState, props) => ({
+          [target]: prevState[target] + 1
+        }));
+      }
+    }
   }
 
   onMinusClick(e) {
-    const target = e.target.parentNode.id;
-    this.setState((prevState, props) => ({
-      [target]: prevState[target] - 1
-    }));
+    let target;
+    if(e.target.parentNode.classList.contains("numAdults")) {
+      target = "numAdults";
+    } else if (e.target.parentNode.classList.contains("numChildren")) {
+      target = "numChildren"
+    } else {
+      target = "numInfants"
+    }
+
+    if(this.state[target] > 0) {
+      if(target === "numAdults") {
+        if (this.state.numAdults > 1) {
+          this.setState((prevState, props) => ({
+            [target]: prevState[target] - 1
+          }));
+        }
+      } else {
+        this.setState((prevState, props) => ({
+          [target]: prevState[target] - 1
+        }));
+      }
+    }
+  }
+  updateGuestText() {
+    const { numAdults, numChildren, numInfants } = this.state;
+    const numGuests = numAdults + numChildren;
+    let ret = "";
+
+    if (numGuests === 1) {
+      ret += "1 guest";
+    } else {
+      ret += `${numGuests} guests`;
+    }
+
+    if (numInfants === 1) {
+      ret += ", 1 infant";
+    } else if (numInfants > 1) {
+      ret += `, ${numInfants} infants`;
+    }
+
+    return ret;
   }
 
   componentDidMount() {
@@ -156,7 +212,7 @@ class BookingBar extends Component {
             <h3 className={styles.barTitle}>Guests</h3>
             <div className={styles.bar}>
               <div className={styles.guestBarTextContainer} onClick={this.handleGuestBarPopup}>
-                <span className={styles.guestText}>1 guest</span>
+                <span className={styles.guestText}>{this.updateGuestText()}</span>
               </div>
               <div className={styles.guestBarPopup} style={guestBarPopupStyle}>
                 <GuestBar numAdults={numAdults} numChildren={numChildren} numInfants={numInfants} onPlusClick={this.onPlusClick} onMinusClick={this.onMinusClick} />
