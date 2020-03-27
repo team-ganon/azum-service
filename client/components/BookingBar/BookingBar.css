@@ -96,7 +96,16 @@
   height: 43px;
 }
 
-.guestBarText {
+.guestBarTextContainer {
+  padding: 5px;
+  padding-left: 23px;
+  height: 100%;
+  width: 100%;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+}
+.guestText {
   padding: 5px;
 }
 
@@ -105,15 +114,14 @@
   padding: 0.55em 0em 0.45em 0.6em;
 }
 
-.highlightDate {
+.highlightText {
   background-color: #99EDE6;
   color: #007A87;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .startDate {
   margin-right: auto;
-
 }
 
 .startDateText, .endDateText {
@@ -130,11 +138,12 @@
   background-color: white;
   width: 100%;
   border: 1px solid #e4e4e4;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 8px 0;
   position: absolute;
   z-index: 1;
   top: 125%;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px
 }
 
 .calendarPopup::before {
@@ -165,3 +174,31 @@
   color: white;
 }
 
+.bar .guestBarPopup {
+  visibility: hidden;
+  background-color: white;
+  width: 100%;
+  border: 1px solid #e4e4e4;
+  border-radius: 4px;
+  padding: 0 10px;
+  position: absolute;
+  z-index: 1;
+  top: 95%;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px
+}
+
+.guestBar:hover  {
+  cursor: pointer;
+}
+
+.btnReserve {
+  height: 46px;
+  width: 100%;
+  font-size: 16px;
+  background: #FF5A5F;
+  font-weight: bold;
+  color: white;
+  border-color: #FF5A5F;
+  border-radius: 4px;
+  margin-top: 10px;
+}
