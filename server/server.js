@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
 const mongoose = require("mongoose");
 mongoose.Promise = require("bluebird");
@@ -9,6 +10,7 @@ mongoose.connect("mongodb://localhost:27017/airbnb", { useNewUrlParser: true, us
 
 var app = express();
 
+app.use(cors());
 app.use(express.static(path.resolve(__dirname, "../public")));
 
 app.get("/api/rentals", (req, res) => {
@@ -20,6 +22,10 @@ app.get("/api/rentals", (req, res) => {
     .catch(err => {
       res.status(400).send(err);
     });
+});
+
+app.get("/app.js", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../public/bundle.js"));
 });
 
 app.listen(3003, err => {
