@@ -22,10 +22,11 @@
 }
 
 .row {
-  padding-bottom: 15px;
+  padding-bottom: 20px;
   display: grid;
   grid-template-columns: 3fr 2fr;
-  grid-template-rows: 50px;
+  /* grid-template-rows: repeat(5, 50px); */
+  grid-auto-rows: 100%;
   grid-template-areas:
     "title button"
     "description button";
@@ -95,5 +96,23 @@
 }
 
 .explainer {
-  grid-column: 1 / span 2;
+  font-size: 14px;
+  padding-bottom: 20px;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 20px;
+}
+
+.closeBtn {
+  font-size: 16px;
+  color: #00888C;
+  font-weight: bold;
+}
+
+.closeBtn:hover {
+  text-decoration: underline #00888C;
+  cursor: pointer;
 }

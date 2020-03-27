@@ -7,7 +7,7 @@ class GuestBar extends Component {
   }
 
   render() {
-    const { max_guests, numAdults, numChildren, numInfants, onMinusClick, onPlusClick, clearData} = this.props;
+    const { max_guests, numAdults, numChildren, numInfants, onMinusClick, onPlusClick, closeGuestBar} = this.props;
 
     return (
       <div className={styles.bar}>
@@ -47,11 +47,11 @@ class GuestBar extends Component {
             </span>
           </div>
         </div>
-        <div className={`${styles.row} ${styles.explainer}`}>
+        <div className={`${styles.explainer}`}>
           {max_guests} guests maximum. Infants don’t count toward the number of guests.
         </div>
-        <div className={styles.row}>
-          <button onClick={clearData}>Clear</button>
+        <div className={styles.btnContainer}>
+          <a className={styles.closeBtn} onClick={closeGuestBar}>Close</a>
         </div>
       </div>
     );

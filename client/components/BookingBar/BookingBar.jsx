@@ -10,6 +10,7 @@ class BookingBar extends Component {
     super(props);
 
     this.state = {
+      lastClickedGuest: null,
       daySelected: null,
       showGuestBar: false,
       showCalendar: false,
@@ -36,8 +37,9 @@ class BookingBar extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.onPlusClick = this.onPlusClick.bind(this);
     this.onMinusClick = this.onMinusClick.bind(this);
-    this.clearData = this.clearData.bind(this);
+    this.closeGuestBar = this.closeGuestBar.bind(this);
     this.updateGuestText = this.updateGuestText.bind(this);
+    this.updateInfantText = this.updateInfantText.bind(this);
   }
 
   handleCalendarPopup(e) {
@@ -68,7 +70,6 @@ class BookingBar extends Component {
   }
 
   handleGuestBarPopup() {
-    console.log('handling');
     this.setState((prevState, props) => {
       if(prevState.showCalendar) {
         return { showCalendar: false, showGuestBar: !prevState.showGuestBar }
@@ -97,13 +98,15 @@ class BookingBar extends Component {
     if(target === "numInfants") {
       if (this.state.numInfants < 5) {
         this.setState((prevState, props) => ({
-          [target]: prevState[target] + 1
+          [target]: prevState[target] + 1,
+          lastClickedGuest: target
         }));
       }
     } else {
       if(this.state.numAdults + this.state.numChildren < this.state.max_guests) {
         this.setState((prevState, props) => ({
-          [target]: prevState[target] + 1
+          [target]: prevState[target] + 1,
+          lastClickedGuest: target
         }));
       }
     }
@@ -123,12 +126,14 @@ class BookingBar extends Component {
       if(target === "numAdults") {
         if (this.state.numAdults > 1) {
           this.setState((prevState, props) => ({
-            [target]: prevState[target] - 1
+            [target]: prevState[target] - 1,
+            lastClickedGuest: target
           }));
         }
       } else {
         this.setState((prevState, props) => ({
-          [target]: prevState[target] - 1
+          [target]: prevState[target] - 1,
+          lastClickedGuest: target
         }));
       }
     }
@@ -136,28 +141,34 @@ class BookingBar extends Component {
   updateGuestText() {
     const { numAdults, numChildren, numInfants } = this.state;
     const numGuests = numAdults + numChildren;
-    let ret = "";
 
+    let ret = ""
     if (numGuests === 1) {
       ret += "1 guest";
     } else {
       ret += `${numGuests} guests`;
     }
 
-    if (numInfants === 1) {
-      ret += ", 1 infant";
-    } else if (numInfants > 1) {
-      ret += `, ${numInfants} infants`;
+    if(numInfants > 0) {
+      ret += ", ";
     }
 
     return ret;
   }
 
-  clearData() {
+  updateInfantText() {
+    const { numInfants } = this.state;
+
+    if (numInfants === 1) {
+      return "1 infant";
+    } else if (numInfants > 1) {
+      return `${numInfants} infants`;
+    }
+  }
+
+  closeGuestBar() {
     this.setState({
-      numAdults: 1,
-      numChildren: 0,
-      numInfants: 0,
+      showGuestBar: false
     });
   }
 
@@ -166,7 +177,6 @@ class BookingBar extends Component {
     const queryString = url.slice(url.indexOf("?"));
     axios.get(`/api/rentals${queryString}`)
       .then(res => {
-        // console.log(res);
         const data = res.data;
         this.setState({
           price: data.price,
@@ -189,7 +199,7 @@ class BookingBar extends Component {
   }
 
   render() {
-    const { numAdults, numChildren, numInfants, daySelected, showCalendar, showGuestBar, clickedDate, price, max_guests, reviews, fees, availability } = this.state;
+    const { lastClickedGuest, numAdults, numChildren, numInfants, daySelected, showCalendar, showGuestBar, clickedDate, price, max_guests, reviews, fees, availability } = this.state;
 
     const calendarPopupStyle = showCalendar ? { visibility: "visible" } : { visibility: "hidden" };
     const guestBarPopupStyle = showGuestBar ? { visibility: "visible" } : { visibility: "hidden" };
@@ -197,9 +207,19 @@ class BookingBar extends Component {
     let highlightStartDateStyle = "";
     let highlightEndDateStyle = "";
     if (clickedDate === "startDate") {
-      highlightStartDateStyle = styles.highlightDate;
+      highlightStartDateStyle = styles.highlightText;
     } else if (clickedDate === "endDate") {
-      highlightEndDateStyle = styles.highlightDate;
+      highlightEndDateStyle = styles.highlightText;
+    }
+
+    let highlightGuestText = "";
+    let highlightInfantText = "";
+    if (showGuestBar) {
+      if (lastClickedGuest === "numInfants" && numInfants !== 0) {
+        highlightInfantText = styles.highlightText;
+      } else {
+        highlightGuestText = styles.highlightText;
+      }
     }
 
     return (
@@ -230,16 +250,21 @@ class BookingBar extends Component {
             <h3 className={styles.barTitle}>Guests</h3>
             <div className={`${styles.bar} ${styles.guestBar}`}>
               <div className={styles.guestBarTextContainer} onClick={this.handleGuestBarPopup}>
-                <span className={styles.guestText}>{this.updateGuestText()}</span>
+                <span className={`${styles.guestText} ${highlightGuestText}`}>
+                  {this.updateGuestText()}
+                </span>
+                <span className={`${styles.guestText} ${highlightInfantText}`}>
+                    {this.updateInfantText()}
+                </span>
               </div>
               <div className={styles.guestBarPopup} style={guestBarPopupStyle}>
-                <GuestBar max_guests={max_guests} numAdults={numAdults} numChildren={numChildren} numInfants={numInfants} onPlusClick={this.onPlusClick} onMinusClick={this.onMinusClick} clearData={this.clearData}/>
+                <GuestBar max_guests={max_guests} numAdults={numAdults} numChildren={numChildren} numInfants={numInfants} onPlusClick={this.onPlusClick} onMinusClick={this.onMinusClick} closeGuestBar={this.closeGuestBar}/>
               </div>
             </div>
           </div>
           <div className={styles.priceCalc}>
             <p className={styles.title}>${price} x 7 nights</p>
-            <p className={styles.description}>$1000</p>
+            <p className={styles.description}>${price * 7}</p>
             <p className={styles.title}>Cleaning fee</p>
             <p className={styles.description}>${fees.cleaning_fee}</p>
             <p className={styles.title}>Service fee</p>
@@ -247,8 +272,9 @@ class BookingBar extends Component {
             <p className={styles.title}>Occupancy taxes and fees</p>
             <p className={styles.description}>${fees.occupancy_fee}</p>
             <p className={`${styles.title} ${styles.total}`}>Total</p>
-            <p className={`${styles.description} ${styles.total}`}>${1000 + fees.cleaning_fee + fees.service_fee + fees.occupancy_fee}</p>
+            <p className={`${styles.description} ${styles.total}`}>${price * 7 + fees.cleaning_fee + fees.service_fee + fees.occupancy_fee}</p>
           </div>
+          <button className={styles.btnReserve}>Reserve</button>
         </div>
       </div>
     );
