@@ -227,7 +227,7 @@ class BookingBar extends Component {
         <div className={styles.wrapper}>
           <h1 className={styles.price}>${price} <span className={styles.perNight}>per night</span></h1>
           <p className={styles.reviews}>
-            <img src="./img/star.svg" alt="star" className={styles.star}></img>
+            <img src="http://3.21.231.164:3003/img/star.svg" alt="star" className={styles.star}></img>
             <span className={styles.avgStars}><b> {reviews.avgStars} </b></span>
             <span className={styles.numReviews}>({reviews.numReviews} reviews)</span>
           </p>
