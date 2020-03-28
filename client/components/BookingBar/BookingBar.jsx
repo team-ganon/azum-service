@@ -175,7 +175,7 @@ class BookingBar extends Component {
   componentDidMount() {
     const url = window.location.href;
     const queryString = url.slice(url.indexOf("?"));
-    axios.get(`/api/rentals${queryString}`)
+    axios.get(`http://3.21.231.164:3003/api/rentals/${queryString}`)
       .then(res => {
         const data = res.data;
         this.setState({
@@ -237,7 +237,7 @@ class BookingBar extends Component {
               <div className={styles.startDate}>
                 <div className={`${styles.startDateText} ${highlightStartDateStyle}`} onClick={this.handleCalendarPopup} id="startDate">03/20/2020</div>
               </div>
-              <img className={styles.arrow} src="./img/arrow.svg" alt="arrow"></img>
+              <img className={styles.arrow} src="http://3.21.231.164:3003/img/arrow.svg" alt="arrow"></img>
               <div className={styles.endDate}>
                 <div className={`${styles.endDateText} ${highlightEndDateStyle}`} onClick={this.handleCalendarPopup} id="endDate">03/27/2020</div>
               </div>
