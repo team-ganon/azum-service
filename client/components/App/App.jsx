@@ -9,6 +9,7 @@ import Calendar from "../Calendar/Calendar.jsx";
 class App extends Component {
   render() {
     return (
+      // Wrapper for entire app
       <div className={styles.app}>
         <BookingBar />
       </div>
